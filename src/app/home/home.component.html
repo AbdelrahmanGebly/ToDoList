@@ -1,0 +1,27 @@
+<div class="container p-5 border rounded bg-success mt-sm-5">
+  <h1 class="text-center text-white mb-5">To Do List!</h1>
+  <form (ngSubmit)="createTask(taskForm)" #taskForm="ngForm">
+    <div class="form-group">
+      <input type="text" class="form-control p-2" placeholder="Write Your Task!" ngModel name="task" required>
+      <small *ngIf="taskForm.invalid && taskForm.dirty" class="text-danger fw-bold">Required Input!</small>
+      <button class="btn btn-primary fw-bold mt-3 d-block ms-auto" [disabled]="taskForm.invalid">Add Task</button>
+    </div>
+  </form>
+  
+</div>
+<div class="container mt-5" *ngIf="taskArray[0]">
+  <table class="table table-hover table-striped text-center p-5">
+    <thead class="py-2">
+      <th scope="col" class="text-danger-emphasis p-3">Task</th>
+      <th scope="col" class="text-danger-emphasis p-3">Status</th>
+      <th scope="col" class="text-danger-emphasis p-3">Actions</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of taskArray;index as i">
+        <td class="fw-bold">{{task.taskName}}</td>
+        <td><input type="checkbox" (change)="toggleStatus(i)"></td>
+        <td><button class="btn btn-outline-danger btn-sm" (click)="deleteTask(i)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
